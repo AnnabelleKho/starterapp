@@ -1,0 +1,15 @@
+
+<%= simple_form_for(@enquiry) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name, label: false, placeholder: 'Enter your name' %>
+    <%= f.input :email, label: false, placeholder: 'Enter your email'%>
+    <%= f.input :subject, label: false, collection:['General enquiry', 'Website error'], prompt: 'Reason for message' %>
+    <%= f.input :message, label: false, placeholder: 'Enter your message...', input_html: { rows:5 } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Get in touch", class:'btn btn-outline-primary' %>
+  </div>
+<% end %>

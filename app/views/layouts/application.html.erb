@@ -17,10 +17,14 @@
 <%= render 'layouts/navbar' %>
 
 
-    <% if notice or alert%>
-    <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <% if notice %>
+    <div class="alert alert-success"><%= notice %></p> </div>
     <% end %>
+
+    <% if alert %>
+      <div class="alert alert-warning"><%= alert %></p></div>
+    <% end %>
+
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>
