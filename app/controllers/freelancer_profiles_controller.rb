@@ -10,6 +10,7 @@ class FreelancerProfilesController < ApplicationController
   # GET /freelancer_profiles/1
   # GET /freelancer_profiles/1.json
   def show
+    @link = Link.new
   end
 
   # GET /freelancer_profiles/new

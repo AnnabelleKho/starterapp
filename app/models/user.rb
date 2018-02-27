@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_one :freelancer_profile 
+  has_one :freelancer_profile
+  has_many :links
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
