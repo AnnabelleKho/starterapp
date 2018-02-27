@@ -1,0 +1,48 @@
+<style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <img src="<%= @freelancer_profile.picture %>" alt="Display Picture" class="card-img-top">
+        <div class="card-body">
+
+          <h5 class="card-title"><%= @freelancer_profile.full_name %> <br> <span class="small text-muted text-uppercase"><%= @freelancer_profile.address%> </span> </h5>
+          <p class="card-text">   <%= @freelancer_profile.bio %></p>
+          <% if @freelancer_profile.user ==current_user %>
+          <p><%= link_to 'Edit', edit_freelancer_profile_path(@freelancer_profile), class:'btn btn-outline-warning btn-sm' %></p>
+          <% end %>
+          <div id="map"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<script>
+      function initMap() {
+        var location = {lat: <%= @freelancer_profile.latitude%>, lng: <%= @freelancer_profile.longitude %>};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: location
+        });
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuPnv1_u0gyWy1CLRg5uaG1z8GhZoajWQ&callback=initMap">
+    </script>

@@ -1,0 +1,33 @@
+<%= simple_form_for(@freelancer_profile) do |f| %>
+<%= f.error_notification %>
+
+<div class="form-inputs">
+  <div class="row">
+    <div class="col-6">
+      <%= f.input :first_name %>
+    </div>
+    <div class="col-6">
+      <%= f.input :last_name %>
+    </div>
+  </div>
+
+  <%= f.input :phone %>
+  <div class="row">
+    <div class="col-9">
+      <%= f.input :suburb %>
+    </div>
+    <div class="col-3">
+      <%= f.input :postcode %>
+    </div>
+
+  </div>
+
+  <%= f.input :country %>
+  <%= f.input :picture %>
+  <%= f.input :bio %>
+</div>
+
+<div class="form-actions">
+  <%= f.button :submit %>
+</div>
+<% end %>

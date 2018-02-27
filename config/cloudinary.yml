@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dkbcymvvt
+  api_key: '556981513956219'
+  api_secret: g_Oqji2fqtq72Y_IwJAyHLapMKg
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dkbcymvvt
+  api_key: '556981513956219'
+  api_secret: g_Oqji2fqtq72Y_IwJAyHLapMKg
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dkbcymvvt
+  api_key: '556981513956219'
+  api_secret: g_Oqji2fqtq72Y_IwJAyHLapMKg
+  enhance_image_tag: true
+  static_image_support: false
