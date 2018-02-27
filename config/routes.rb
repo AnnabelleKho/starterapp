@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :freelancer_profiles
   resources :enquiries
   get 'contact', to: 'pages#contact'
 
