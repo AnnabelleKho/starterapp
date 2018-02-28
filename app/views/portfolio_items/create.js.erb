@@ -1,0 +1,6 @@
+$('portfolio-items').append('<%= j render partial: "portfolio_items/portfolio_item", locals:{ portfolio_item: @portfolio_item } %>');
+$('#new-portfolio-item').modal('hide');
+$('#new_portfolio_item')[0].reset();
+
+// modal-hide is the modal you want to hide-- see page source
+// reset is the form you want to set

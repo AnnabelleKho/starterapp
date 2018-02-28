@@ -7,7 +7,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-6">
+    <div class="col-4">
       <div class="card">
         <img src="<%= @freelancer_profile.picture %>" alt="Display Picture" class="card-img-top">
         <div class="card-body">
@@ -21,21 +21,32 @@
             <%= @freelancer_profile.bio %></p>
 
           <ul id="links">
-              <%= render @freelancer_profile.user.links %>
+            <%= render @freelancer_profile.user.links %>
 
           </ul>
 
           <% if @freelancer_profile.user == current_user %>
             <p><%= link_to 'Edit', edit_freelancer_profile_path(@freelancer_profile), class: 'btn btn-outline-warning btn-sm' %>
 
-              <a href="#" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter" data-turbolinks="false">
+              <a href="#" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter" data-turbolinks="false">
                 Add Link</a>
+              <a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#new-portfolio-item" data-turbolinks="false">
+                Add Portfolio Item
+              </a>
+
             </p>
           <% end %>
           <div id="map"></div>
         </div>
 
       </div>
+
+    </div>
+
+    <div class="col-md-8" id="portfolio-items">
+      <h3> Portfolio Showcase </h3>
+      <br>
+        <%= render @freelancer_profile.user.portfolio_items %>
 
     </div>
 
@@ -54,6 +65,26 @@
       </div>
       <div class="modal-body">
         <%= render 'links/form'%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="new-portfolio-item" tabindex="-1" role="dialog" aria-labelledby="new-portfolio-item" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="new-portfolio-item">Add Portfolio Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'portfolio_items/form' %>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

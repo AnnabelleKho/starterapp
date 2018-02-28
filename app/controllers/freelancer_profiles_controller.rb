@@ -11,6 +11,7 @@ class FreelancerProfilesController < ApplicationController
   # GET /freelancer_profiles/1.json
   def show
     @link = Link.new
+    @portfolio_item = PortfolioItem.new
   end
 
   # GET /freelancer_profiles/new
