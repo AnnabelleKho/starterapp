@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @gig_type.icon %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @gig_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @gig_type.description %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @gig_type.color %>
+</p>
+
+<%= link_to 'Edit', edit_gig_type_path(@gig_type) %> |
+<%= link_to 'Back', gig_types_path %>

@@ -1,0 +1,6 @@
+$('#gigs').append('<%= j render partial: "gigs/gig", locals:{ gig: @gig }%>');
+$('#gig-id').val('<%= @gig.id%>')
+// $('#new-gig').modal('hide');
+// $('#new_gig'[0]).reset();
+$('#new_gig').hide('fast');
+$('#payment-form').show('fast');

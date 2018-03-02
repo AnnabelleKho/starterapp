@@ -1,0 +1,213 @@
+<style>
+   #map {
+    height: 200px;
+    width: 100%;
+    border: 3px solid #888;
+    border-radius: 5px;
+   }
+</style>
+
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-1">
+          <img class="img-fluid img-thumbnail" src="<%= @org_profile.logo %>" alt="Card image cap">
+        </div>
+        <div class="col-6">
+          <h5 class="card-title">
+            <%= @org_profile.name %>
+            <br>
+            <span class="small text-muted text-uppercase">
+              <%= @org_profile.full_address %>
+            </span>
+          </h5>
+          <p class="card-text">
+            <%= @org_profile.description %>
+          </p>
+          <p>
+            <strong>Contact name:</strong>
+            <%= @org_profile.contact_name %>
+          </p>
+
+          <p>
+            <strong>Contact phone:</strong>
+            <%= @org_profile.contact_phone %>
+          </p>
+
+          <p>
+            <strong>Link:</strong>
+            <a href="<%= @org_profile.link %>" target="_blank"><%= @org_profile.link %></a>
+          </p>
+          <p>
+          <% if @org_profile.user == current_user %>
+            <%= link_to 'Edit', edit_org_profile_path(@org_profile), class: 'btn btn-outline-warning btn-sm' %>
+            <% end %>
+            <a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#new-gig" data-turbolinks="false">
+              List a gig
+            </a>
+          </p>
+
+          </div>
+
+        <div class="col-5">
+          <div id="map"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col" id="gigs">
+          <%= render @org_profile.user.gigs  %>
+
+        </div>
+
+      </div>
+</div>
+
+<div class="modal fade" id="new-gig" tabindex="-1" role="dialog" aria-labelledby="new-portfolio-item" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="new-portfolio-item">List a gig</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'gigs/form' %>
+
+        <form action="/charges" method="post" id="payment-form" style="display:none;">
+
+        <input type="hidden" name="utf8" value="&#x2713;"/>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <input type="hidden" name="gig_id" value="" id="gig-id">
+
+          <div class="form-row">
+            <label for="card-element" >
+              Credit or debit card
+            </label>
+            <div id="card-element" class="field" style="width:100%">
+              <!-- A Stripe Element will be inserted here. -->
+            </div>
+
+            <!-- Used to display form errors. -->
+            <div id="card-errors" role="alert"></div>
+          </div>
+
+          <button class="btn btn-success mt-2" id="submit-payment" type="submit">
+          <span class="fa fa-lock"></span>
+         </span>
+
+
+            Pay $5
+          </button>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <script>
+      function initMap() {
+        var location = {
+          lat: <%= @org_profile.latitude %>,
+          lng: <%= @org_profile.longitude %>
+        };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: location
+        });
+        var marker = new google.maps.Marker({position: location, map: map});
+      }
+    </script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+<script type="text/javascript">
+
+// Create a Stripe client.
+var stripe = Stripe('pk_test_CXE9DTj7BRJa7hQ78mYuzxQ8');
+
+// Create an instance of Elements.
+var elements = stripe.elements();
+
+// Custom styling can be passed to options when creating an Element.
+// (Note that this demo uses a wider set of styles than the guide below.)
+var style = {
+base: {
+  color: '#32325d',
+  lineHeight: '18px',
+  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+  fontSmoothing: 'antialiased',
+  fontSize: '16px',
+  '::placeholder': {
+    color: '#aab7c4'
+  }
+},
+invalid: {
+  color: '#fa755a',
+  iconColor: '#fa755a'
+}
+};
+
+// Create an instance of the card Element.
+var card = elements.create('card', {style: style});
+
+// Add an instance of the card Element into the `card-element` <div>.
+card.mount('#card-element');
+
+// Handle real-time validation errors from the card Element.
+card.addEventListener('change', function(event) {
+var displayError = document.getElementById('card-errors');
+if (event.error) {
+  displayError.textContent = event.error.message;
+} else {
+  displayError.textContent = '';
+}
+});
+
+// Handle form submission.
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+event.preventDefault();
+
+function stripeTokenHandler(token) {
+  // Insert the token ID into the form so it gets submitted to the server
+  var form = document.getElementById('payment-form');
+  var submitButton = document.getElementById('submit-payment');
+  var hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'stripeToken');
+  hiddenInput.setAttribute('value', token.id);
+  form.appendChild(hiddenInput);
+
+  // Submit the form
+  form.submit();
+  submitButton.innerHTML = '<i class="fa fa-spinner fa-spin fa-3px fa-fw"></i>';
+  submitButton.disabled = true;
+}
+
+stripe.createToken(card).then(function(result) {
+  if (result.error) {
+    // Inform the user if there was an error.
+    var errorElement = document.getElementById('card-errors');
+    errorElement.textContent = result.error.message;
+  } else {
+    // Send the token to your server.
+    stripeTokenHandler(result.token);
+  }
+});
+});
+</script>
+
+    <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuPnv1_u0gyWy1CLRg5uaG1z8GhZoajWQ&callback=initMap"></script>
+
+    <!-- <script> function initMap() { var location = { lat: <%= @org_profile.latitude%>, lng: <%= @org_profile.longitude %> }; var map = new google.maps.Map(document.getElementById('map'), { zoom: 12, center: location }); var marker = new
+    google.maps.Marker({position: location, map: map}); } </script> <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuPnv1_u0gyWy1CLRg5uaG1z8GhZoajWQ&callback=initMap"></script> -->
+  </div>

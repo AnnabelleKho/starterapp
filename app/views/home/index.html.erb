@@ -1,36 +1,40 @@
 <main role="main">
 
      <!-- Main jumbotron for a primary marketing message or call to action -->
-     <div class="jumbotron">
-       <div class="container">
-         <h1 class="display-3">Hello, world!</h1>
-         <p>Create your freelancer profile and find digital gigs in your local area. </p>
-         <p><a class="btn btn-primary btn-lg" href="/users/sign_up?user_type=freelancer" role="button">Create your profile &raquo;</a></p>
-       </div>
-     </div>
+     <%= render 'home/jumbo' %>
 
      <div class="container">
        <!-- Example row of columns -->
        <div class="row">
-         <div class="col-md-4">
-           <h2>Heading</h2>
-           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+         <div class="col-md-6">
+           <div class="row">
+             <% @new_freelancers.each do |new_freelancer|%>
+             <div class="col-md-6">
+               <h2><%= new_freelancer.full_name %></h2>
+               <p> <%= new_freelancer.bio%></p>
+               <p><a class="btn btn-secondary" href="/messages/new?receiver_id=<%=new_freelancer.user.id%>" role="button">
+                 <i class="fa fa-envelope-o"></i> Message me &raquo;</a></p>
+             </div>
+             <% end %>
+           </div>
          </div>
-         <div class="col-md-4">
-           <h2>Heading</h2>
-           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+         <div class="col-md-6">
+           <div class="row">
+             <% @new_gig.each do |new_gig|%>
+             <div class="col-md-6">
+               <h2><%= new_gig.name%></h2>
+               <p> <%= new_gig.description %></p>
+               <a href="/proposals/new?gig_id=<%= new_gig.id%>" class="btn btn-info"> Apply for this gig &raquo;</a>
+             </div>
+             <% end %>
+           </div>
+
          </div>
-         <div class="col-md-4">
-           <h2>Heading</h2>
-           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-         </div>
+
+
+
        </div>
-
        <hr>
-
      </div> <!-- /container -->
 
    </main>

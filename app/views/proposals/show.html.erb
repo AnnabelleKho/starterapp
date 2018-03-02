@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<p>
+  <strong>Gig:</strong>
+  <%= @proposal.gig %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @proposal.content %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @proposal.status %>
+</p>
+
+<%= link_to 'Edit', edit_proposal_path(@proposal) %> |
+<%= link_to 'Back', proposals_path %>

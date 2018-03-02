@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Org Profiles</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Logo</th>
+      <th>User</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Address</th>
+      <th>Suburb</th>
+      <th>State</th>
+      <th>Postcode</th>
+      <th>Country</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @org_profiles.each do |org_profile| %>
+      <tr>
+        <td><img src="<%= org_profile.logo_url %>" alt="Logo Picture" class="card-img-top"></td>
+        <td><%= org_profile.user_id %></td>
+        <td><%= org_profile.name %></td>
+        <td><%= org_profile.description %></td>
+        <td><%= org_profile.address %></td>
+        <td><%= org_profile.suburb %></td>
+        <td><%= org_profile.state %></td>
+        <td><%= org_profile.postcode %></td>
+        <td><%= org_profile.country %></td>
+        <td><%= link_to 'Show', org_profile %></td>
+        <td><%= link_to 'Edit', edit_org_profile_path(org_profile) %></td>
+        <td><%= link_to 'Destroy', org_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Org Profile', new_org_profile_path %>

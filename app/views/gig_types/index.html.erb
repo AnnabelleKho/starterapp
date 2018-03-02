@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Gig Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Icon</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Color</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gig_types.each do |gig_type| %>
+      <tr>
+        <td><%= gig_type.icon %></td>
+        <td><%= gig_type.name %></td>
+        <td><%= gig_type.description %></td>
+        <td><%= gig_type.color %></td>
+        <td><%= link_to 'Show', gig_type %></td>
+        <td><%= link_to 'Edit', edit_gig_type_path(gig_type) %></td>
+        <td><%= link_to 'Destroy', gig_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gig Type', new_gig_type_path %>

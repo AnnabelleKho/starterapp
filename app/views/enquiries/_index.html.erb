@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <p>Sort messages:</p>
+      </div>
+      <div class="class-md-3">
+
+
+      <%= link_to '<i class="fa fa-caret-up"></i>'.html_safe,  enquiries_path(sort: 'asc'), class: 'btn btn-outline-info'%>
+
+      <%= link_to '<i class="fa fa-caret-down"></i>'.html_safe, enquiries_path(sort: 'desc'), class: 'btn btn-outline-info'%>
+
+  </div>
+  </div>
+
+</div>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Subject</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @enquiries.each do |enquiry| %>
+      <tr>
+        <td><%= enquiry.name %></td>
+        <td><%= enquiry.subject %></td>
+        <td><%= link_to truncate(enquiry.message, length: 40), enquiry %></td>
+        <td><%= link_to 'Show', enquiry %></td>
+        <td><%= time_ago_in_words(enquiry.created_at) %> ago </td>
+        <td><%= link_to '<i class="fa fa-trash"></i>'.html_safe, enquiry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

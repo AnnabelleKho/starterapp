@@ -1,0 +1,21 @@
+<div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              Menu</h5>
+            <ul class="nav nav-pills flex-column">
+              <li class="nav-item">
+                <a class="nav-link <% 'active' if current_page?(admin_path)%>" href="/admin">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <%= 'active' if current_page?(freelancer_profiles_path)%>" href="/freelancer_profiles">Freelancers
+                  <span class="badge badge-primary badge-pill"><%= FreelancerProfile.all.count %></span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <%= 'active' if current_page?(org_profiles_path)%>" href="/org_profiles">Organisations</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <%= 'active' if current_page?(gigs_path)%> " href="/gigs">Gigs</a>
+              </li>
+            </ul>
+              </div>
+          </div>

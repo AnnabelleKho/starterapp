@@ -1,6 +1,6 @@
 class FreelancerProfilesController < ApplicationController
   before_action :set_freelancer_profile, only: [:show, :edit, :update, :destroy]
-
+  layout 'admin', only: [:show, :index]
   # GET /freelancer_profiles
   # GET /freelancer_profiles.json
   def index

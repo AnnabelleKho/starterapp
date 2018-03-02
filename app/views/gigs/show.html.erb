@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @gig.user %>
+</p>
+
+<p>
+  <strong>Gig type:</strong>
+  <%= @gig.gig_type %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @gig.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @gig.description %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @gig.deadline %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @gig.status %>
+</p>
+
+<%= link_to 'Edit', edit_gig_path(@gig) %> |
+<%= link_to 'Back', gigs_path %>

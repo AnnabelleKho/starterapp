@@ -1,11 +1,15 @@
 class EnquiriesController < ApplicationController
   skip_before_action :authenticate_user!, only: :create
   before_action :set_enquiry, only: [:show, :edit, :update, :destroy]
-
+  layout 'admin', only: :show
   # GET /enquiries
   # GET /enquiries.json
   def index
+    if params[:sort] =='asc'
+      @enquiries = Enquiry.chron_order_sort(params[:sort])
+    else
     @enquiries = Enquiry.all
+    end
   end
 
   # GET /enquiries/1

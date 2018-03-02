@@ -1,0 +1,16 @@
+
+<%= simple_form_for(@gig, remote: true) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :gig_type %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.date_field :deadline, class: 'form-control' %>
+  </div>
+  <br>
+
+  <div class="form-actions">
+    <%= f.submit "List gig", class:'btn btn-outline-success btn-sm' %>
+  </div>
+<% end %>

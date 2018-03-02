@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<h2>Enquiries</h2>
 
 <p>
   <strong>Name:</strong>
@@ -20,5 +20,5 @@
   <%= @enquiry.message %>
 </p>
 
-<%= link_to 'Edit', edit_enquiry_path(@enquiry) %> |
-<%= link_to 'Back', enquiries_path %>
+<p><strong> Received at:</strong> <%= @enquiry.created_at.strftime('%a %b %e %Y %H:%M:%S %Z')%> </p>
+<%= link_to 'Back', admin_path %>
