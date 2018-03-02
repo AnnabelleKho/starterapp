@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-validate :subject, :message, presence: true
+validates :subject, :message, presence: true
 
   def self.inbox
     where(receiver_id: user_id).reverse_chron_order
